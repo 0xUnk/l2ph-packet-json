@@ -4,7 +4,7 @@
 Thank you to [@npetrovski](https://github.com/npetrovski/l2js-client)
 
 A package generator from l2phx to json, 
-to speed up package creation from the [@l2js-client](https://github.com/npetrovski/l2js-client)
+to speed up package creation from the [l2js-client](https://github.com/npetrovski/l2js-client)
 
 ## Example
 
