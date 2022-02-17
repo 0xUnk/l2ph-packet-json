@@ -14,17 +14,6 @@ interface IOpcode {
   bytes?: ITypes[];
 }
 
-enum PacketClient {
-  'packetsc4',
-  'packetsc5',
-  'PacketsFreya',
-  'PacketsGOD',
-  'PacketsGracia',
-  'packetsGraciaEpilogue',
-  'PacketsHighFive',
-  'packetsInterlude'
-}
-
 const camalize = (string: string) => {
   return string
     .toLowerCase()
