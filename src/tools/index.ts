@@ -1,6 +1,6 @@
 import ini from "ini";
 import path from "path";
-import { readFileSync } from "fs";
+import { readFileSync, readdirSync } from "fs";
 
 interface ITypes {
   type: string;
@@ -14,12 +14,16 @@ interface IOpcode {
   bytes?: ITypes[];
 }
 
-const packetFile = ini.parse(
-  readFileSync(path.resolve(__dirname, '../packets/packetsc4.ini'), "utf-8")
-);
-
-const packetsClient = packetFile.client;
-const packetsServer = packetFile.server;
+enum PacketClient {
+  'packetsc4',
+  'packetsc5',
+  'PacketsFreya',
+  'PacketsGOD',
+  'PacketsGracia',
+  'packetsGraciaEpilogue',
+  'PacketsHighFive',
+  'packetsInterlude'
+}
 
 const camalize = (string: string) => {
   return string
@@ -98,9 +102,25 @@ const loop = (packet: string) => {
   }
 };
 
-export const generate = (type: string) => {
-  const data = type === "Client" ? packetsClient : packetsServer;
 
+const packetClient = (type: string, client: string) => {
+  
+  const dir = readdirSync(process.cwd() + `/src/packets`);
+
+  const packet = dir.find((packet) => packet.includes(client));
+  const packetFile = ini.parse(
+    readFileSync(path.resolve(__dirname, `../packets/${packet}`), "utf-8")
+  );
+  
+  const packetsClient = packetFile.client;
+  const packetsServer = packetFile.server;
+
+  return (type === "Client") ? packetsClient : packetsServer;
+
+}
+
+export const generate = (type: string, client = "HighFive") => {
+  const data = packetClient(type, client);
   if (!type) return;
 
   let pushItem: IOpcode[] = [];
