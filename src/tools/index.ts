@@ -1,6 +1,6 @@
 import ini from "ini";
 import path from "path";
-import { readFileSync, readdirSync } from "fs";
+import { readFileSync, readdirSync, mkdirSync, existsSync } from "fs";
 import jsonfile from 'jsonfile'
 
 interface ITypes {
@@ -15,13 +15,20 @@ interface IOpcode {
   bytes?: ITypes[];
 }
 
-const createJson = (packet: IOpcode[]) => { 
-  const file = process.cwd() + `/json/packets.json`;
+const createJson = (packet: IOpcode, client: string, type: string) => { 
   const obj = packet
+
+  const dir = process.cwd() + `/json/${client}/${type}/${obj.name}.json`;
   
-  jsonfile.writeFile(file, obj, (err) => {
+  if (!existsSync(path.dirname(dir))) { 
+    mkdirSync(path.dirname(dir), { recursive: true });
+  }
+
+
+  jsonfile.writeFile(dir, obj, (err) => {
     if (err) console.error(err)
   })
+
 }
 
 const camalize = (string: string) => {
@@ -138,13 +145,22 @@ export const generate = (type: string, client = "HighFive") => {
             name,
             bytes,
           });
+
+          createJson({
+            opcode: key,
+            name,
+            bytes,
+          },
+          client,
+          type
+          )
+
         }
       }
     } catch (error) {
       console.log(error);
     }
   });
-  createJson(pushItem)
   return pushItem;
 };
 
