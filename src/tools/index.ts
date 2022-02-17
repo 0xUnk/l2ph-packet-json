@@ -110,8 +110,7 @@ const loop = (packet: string) => {
 
 
 const packetClient = (type: string, client: string) => {
-  
-  const dir = readdirSync(process.cwd() + `/src/packets`);
+  const dir = readdirSync(process.cwd() + `/src/packets/`);
 
   const packet = dir.find((packet) => packet.includes(client));
   const packetFile = ini.parse(
@@ -120,7 +119,6 @@ const packetClient = (type: string, client: string) => {
   
   const packetsClient = packetFile.client;
   const packetsServer = packetFile.server;
-
   return (type === "Client") ? packetsClient : packetsServer;
 
 }
@@ -128,39 +126,45 @@ const packetClient = (type: string, client: string) => {
 export const generate = (type: string, client = "HighFive") => {
   const data = packetClient(type, client);
   if (!type) return;
-
+  if(!data) return;
   let pushItem: IOpcode[] = [];
 
-  Object.entries(data).forEach(([key, value]) => {
-    try {
-      if (typeof value === "string") {
-        const name = nameRegex(value);
-        const bytes = typeRegex(value);
-
-        if (key.includes("//") || key.length > 2) return; // ignore comment and two ID packets
-
-        if (name) {
-          pushItem.push({
-            opcode: key,
-            name,
-            bytes,
-          });
-
-          createJson({
-            opcode: key,
-            name,
-            bytes,
-          },
-          client,
-          type
-          )
-
+  try {
+   
+    Object.entries(data).forEach(([key, value]) => {
+      try {
+        if (typeof value === "string") {
+          const name = nameRegex(value);
+          const bytes = typeRegex(value);
+  
+          if (key.includes("//") || key.length > 2) return; // ignore comment and two ID packets
+  
+          if (name) {
+            pushItem.push({
+              opcode: key,
+              name,
+              bytes,
+            });
+  
+            createJson({
+              opcode: key,
+              name,
+              bytes,
+            },
+            client,
+            type
+            )
+  
+          }
         }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  });
+    });
+  } catch (error) {
+    console.log(error)
+  }
+
   return pushItem;
 };
 
