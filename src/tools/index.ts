@@ -1,6 +1,7 @@
 import ini from "ini";
 import path from "path";
 import { readFileSync, readdirSync } from "fs";
+import jsonfile from 'jsonfile'
 
 interface ITypes {
   type: string;
@@ -12,6 +13,15 @@ interface IOpcode {
   opcode: string;
   name: string;
   bytes?: ITypes[];
+}
+
+const createJson = (packet: IOpcode[]) => { 
+  const file = process.cwd() + `/json/packets.json`;
+  const obj = packet
+  
+  jsonfile.writeFile(file, obj, (err) => {
+    if (err) console.error(err)
+  })
 }
 
 const camalize = (string: string) => {
@@ -134,6 +144,7 @@ export const generate = (type: string, client = "HighFive") => {
       console.log(error);
     }
   });
-
+  createJson(pushItem)
   return pushItem;
 };
+
