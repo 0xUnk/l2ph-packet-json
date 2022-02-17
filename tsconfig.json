@@ -1,0 +1,20 @@
+{
+  "declaration": true,
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "lib": ["es5", "es6", "dom"],
+    "declaration": true,
+    "outDir": "./src/",
+    "rootDir": "./",
+    "strict": true,
+    "removeComments": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true
+  },
+  "include": ["**/*"],
+  "exclude": ["**/dist/**/*.d.ts", "./*.js", "dist", "node_modules", "examples", "proxy"]
+}
