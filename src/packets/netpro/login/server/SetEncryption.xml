@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packet id="LS_SM_SET_ENCRYPTION" xmlns="http://www.l2emu-unique.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.l2emu-unique.net ../../../schemata/packet.xsd">
+	<dword alias="Session ID" />
+	<dword alias="Protocol version" />
+	<bytes alias="RSA scrambled modulus">
+		<length>128</length>
+	</bytes>
+
+	<dword alias="GG (1)" />
+	<dword alias="GG (2)" />
+	<dword alias="GG (3)" />
+	<dword alias="GG (4)" />
+
+	<bytes alias="Blowfish key">
+		<length>16</length>
+		<scriptAlias id="__INVASIVE_AUTO_EXTRACT_BF_KEY" />
+	</bytes>
+
+	<byte alias="" optional="true" />
+	<byte alias="" optional="true" />
+	<byte alias="" optional="true" />
+	<byte alias="" optional="true" />
+
+	<bytes alias="Padding" optional="true">
+		<length>11</length>
+	</bytes>
+	<bytes alias="Complementary cipher key" optional="true">
+		<length>4</length>
+	</bytes>
+	<bytes alias="Padding" optional="true">
+		<length>4</length>
+	</bytes>
+</packet>

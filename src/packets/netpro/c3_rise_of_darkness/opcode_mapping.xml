@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns="http://www.l2emu-unique.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.l2emu-unique.net ../../schemata/mapping.xsd">
+	<client>
+		<packet opcodePrefix="C5" id="CM_CONFIRM_DLG" />
+		<packet opcodePrefix="C6" id="CM_REQ_PREVIEW_ITEM" />
+		<packet opcodePrefix="C7" id="CM_REQ_SSQ_STATUS" />
+		<packet opcodePrefix="C8" id="CM_PETITION_VOTE" />
+		<packet opcodePrefix="CA" id="CM_REPLY_GAME_GUARD_QUERY" />
+		<packet opcodePrefix="CC" id="CM_REQ_SEND_L2_FRIEND_SAY" />
+		<packet opcodePrefix="CD" id="CM_REQ_OPEN_MINIMAP" />
+		<packet opcodePrefix="CE" id="CM_REQ_SEND_MSN_CHAT_LOG" />
+	</client>
+	<server>
+		<packet opcodePrefix="EC" id="SM_CLIENT_SET_TIME" />
+		<packet opcodePrefix="ED" id="SM_CONFIRM_DLG" />
+		<packet opcodePrefix="EE" id="SM_PARTY_SPELLED" />
+		<packet opcodePrefix="EF" id="SM_SHOP_PREVIEW_LIST" />
+		<packet opcodePrefix="F0" id="SM_SHOP_PREVIEW_INFO" />
+		<packet opcodePrefix="F1" id="SM_CAMERA_MODE" />
+		<packet opcodePrefix="F2" id="SM_SHOW_XMAS_SEAL" />
+		<packet opcodePrefix="F3" id="SM_ETC_STATUS_UPDATE" />
+		<packet opcodePrefix="F4" id="SM_SHORT_BUFF_STATUS_UPDATE" />
+		<packet opcodePrefix="F5" id="SM_SSQ_STATUS" />
+		<packet opcodePrefix="F6" id="SM_PETITION_VOTE" />
+		<packet opcodePrefix="F7" id="SM_AGIT_DECO_INFO" />
+		<packet opcodePrefix="F8" id="SM_SSQ_INFO" />
+		<packet opcodePrefix="F9" id="SM_GAME_GUARD_QUERY" />
+		<packet opcodePrefix="FA" id="SM_L2_FRIEND_LIST" />
+		<packet opcodePrefix="FB" id="SM_L2_FRIEND" />
+		<packet opcodePrefix="FC" id="SM_L2_FRIEND_STATUS" />
+		<packet opcodePrefix="FD" id="SM_L2_FRIEND_SAY" />
+		<packet opcodePrefix="FE 01 00" id="SM_EX_REGEN_MAX" />
+	</server>
+</mapping>

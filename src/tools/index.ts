@@ -1,7 +1,7 @@
 import ini from "ini";
 import path from "path";
-import { readFileSync, readdirSync, mkdirSync, existsSync } from "fs";
 import jsonfile from "jsonfile";
+import { readFileSync, readdirSync, mkdirSync, existsSync } from "fs";
 
 interface ITypes {
   type: string;
@@ -158,7 +158,7 @@ export const generate = (type: string, client = "HighFive") => {
           prefix: {
             $type: "bytes",
             $length: 1,
-            $default: [parseInt("0x" + key)],
+            $default: [key],
           },
         };
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packet id="SM_L2_FRIEND" xmlns="http://www.l2emu-unique.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.l2emu-unique.net ../../../schemata/packet.xsd">
+	<dword alias="Action" type="ItemChange" />
+	<dword alias="Character PK" />
+	<string alias="Name" />
+	<dword alias="Online" type="YesOrNo" id="online" />
+	<branch id="online" condition="Positive">
+		<dword alias="Character OID" type="ObjectID" />
+	</branch>
+	<branch id="online" condition="Zero">
+		<dword alias="0" />
+	</branch>
+</packet>

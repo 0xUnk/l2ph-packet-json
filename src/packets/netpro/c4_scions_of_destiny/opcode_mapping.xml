@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns="http://www.l2emu-unique.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.l2emu-unique.net ../../schemata/mapping.xsd">
+	<client>
+		<packet opcodePrefix="CF" id="184" />
+		<packet opcodePrefix="D0 01 00" id="CM_REQ_OUST_FROM_PARTY_ROOM" />
+		<packet opcodePrefix="D0 02 00" id="CM_REQ_DISMISS_PARTY_ROOM" />
+		<packet opcodePrefix="D0 03 00" id="CM_REQ_WITHDRAW_PARTY_ROOM" />
+		<packet opcodePrefix="D0 04 00" id="CM_REQ_HAND_OVER_PARTY_MASTER" />
+		<packet opcodePrefix="D0 05 00" id="CM_REQ_AUTO_SOUL_SHOT" />
+		<packet opcodePrefix="D0 06 00" id="CM_REQ_EX_ENCHANT_SKILL_INFO" />
+		<packet opcodePrefix="D0 07 00" id="CM_REQ_EX_ENCHANT_SKILL" />
+		<packet opcodePrefix="D0 08 00" id="CM_REQ_MANOR_LIST" />
+		<packet opcodePrefix="D0 09 00" id="CM_REQ_PROCURE_CROP_LIST" />
+		<packet opcodePrefix="D0 0A 00" id="CM_REQ_SET_SEED" />
+		<packet opcodePrefix="D0 0B 00" id="CM_REQ_SET_CROP" />
+		<packet opcodePrefix="D0 0C 00" id="CM_REQ_WRITE_HERO_WORDS" />
+		<packet opcodePrefix="D0 0D 00" id="CM_REQ_EX_ASK_JOIN_MPCC" />
+		<packet opcodePrefix="D0 0E 00" id="CM_REQ_EX_ACCEPT_JOIN_MPCC" />
+		<packet opcodePrefix="D0 0F 00" id="CM_REQ_EX_OUST_FROM_MPCC" />
+		<packet opcodePrefix="D0 10 00" id="CM_REQ_EX_PLEDGE_CREST_LARGE" />
+		<packet opcodePrefix="D0 11 00" id="CM_REQ_EX_SET_PLEDGE_CREST_LARGE" />
+		<packet opcodePrefix="D0 12 00" id="CM_REQ_OLYMPIAD_OBSERVER_END" />
+		<packet opcodePrefix="D0 13 00" id="CM_REQ_OLYMPIAD_MATCH_LIST" />
+	</client>
+	<server>
+		<packet opcodePrefix="FE 13 00" id="SM_EX_FISHING_START" />
+		<packet opcodePrefix="FE 14 00" id="SM_EX_FISHING_END" />
+		<packet opcodePrefix="FE 15 00" id="SM_EX_FISHING_START_COMBAT" />
+		<packet opcodePrefix="FE 16 00" id="SM_EX_FISHING_HP_REGEN" />
+		<packet opcodePrefix="FE 17 00" id="SM_EX_ENCHANT_SKILL_LIST" />
+		<packet opcodePrefix="FE 18 00" id="SM_EX_ENCHANT_SKILL_INFO" />
+		<packet opcodePrefix="FE 19 00" id="SM_EX_SHOW_QUEST_INFO" />
+		<packet opcodePrefix="FE 1A 00" id="SM_EX_SHOW_QUEST_MARK" />
+		<packet opcodePrefix="FE 1B 00" id="SM_EX_SEND_MANOR_LIST" />
+		<packet opcodePrefix="FE 1C 00" id="SM_EX_SHOW_SEED_INFO" />
+		<packet opcodePrefix="FE 1D 00" id="SM_EX_SHOW_CROP_INFO" />
+		<packet opcodePrefix="FE 1E 00" id="SM_EX_SHOW_MANOR_DEFAULT_INFO" />
+		<packet opcodePrefix="FE 1F 00" id="SM_EX_SHOW_SEED_SETTING" />
+		<packet opcodePrefix="FE 20 00" id="SM_EX_SHOW_CROP_SETTING" />
+		<packet opcodePrefix="FE 21 00" id="SM_EX_SHOW_SELL_CROP_LIST" />
+		<packet opcodePrefix="FE 22 00" id="SM_EX_SHOW_PROCURE_CROP_DETAIL" />
+		<packet opcodePrefix="FE 23 00" id="SM_EX_HERO_LIST" />
+		<packet opcodePrefix="FE 24 00" id="SM_EX_SERVER_PRIMITIVE" />
+		<packet opcodePrefix="FE 25 00" id="SM_EX_OPEN_MPCC" />
+		<packet opcodePrefix="FE 26 00" id="SM_EX_CLOSE_MPCC" />
+		<packet opcodePrefix="FE 27 00" id="SM_EX_ASK_JOIN_MPCC" />
+		<packet opcodePrefix="FE 28 00" id="SM_PLEDGE_CREST_LARGE" />
+		<packet opcodePrefix="FE 29 00" id="SM_EX_OLYMPIAD_USER_INFO" />
+		<packet opcodePrefix="FE 2A 00" id="SM_EX_OLYMPIAD_SPELLED_INFO" />
+		<packet opcodePrefix="FE 2B 00" id="SM_EX_OLYMPIAD_MODE" />
+		<packet opcodePrefix="FE 2C 00" id="SM_EX_OLYMPIAD_MATCH_END" />
+		<packet opcodePrefix="FE 2D 00" id="SM_EX_MAIL_ARRIVED" />
+		<packet opcodePrefix="FE 2E 00" id="SM_EX_STORAGE_MAX_COUNT" />
+		<packet opcodePrefix="FE 2F 00" id="SM_EX_EVENT_MATCH_MANAGE" />
+		<packet opcodePrefix="FE 30 00" id="SM_EX_MULTI_PARTY_COMMAND_CHANNEL_INFO" />
+	</server>
+</mapping>

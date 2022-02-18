@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packet id="482" xmlns="http://www.l2emu-unique.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.l2emu-unique.net ../../../schemata/packet.xsd">
+	<dword alias="Success" type="YesOrNo">
+		<scriptAlias id="__INVASIVE_AUTO_EXTRACT_EXTRA_SESSION_OPEN" />
+	</dword>
+	<bytes alias="Dimensional server IPv4" type="IPv4">
+		<length>4</length>
+		<scriptAlias id="__INVASIVE_AUTO_EXTRACT_EXTRA_SESSION_IP" />
+	</bytes>
+	<dword alias="Entrance server" type="GameServerName" />
+	<dword alias="Character ID" />
+	<dword alias="Session ID" />
+</packet>
