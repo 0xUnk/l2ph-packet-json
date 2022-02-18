@@ -1,7 +1,7 @@
 import ini from "ini";
 import path from "path";
 import { readFileSync, readdirSync, mkdirSync, existsSync } from "fs";
-import jsonfile from 'jsonfile'
+import jsonfile from "jsonfile";
 
 interface ITypes {
   type: string;
@@ -15,21 +15,24 @@ interface IOpcode {
   bytes?: ITypes[];
 }
 
-const createJson = (packet: IOpcode, client: string, type: string) => { 
-  const obj = packet
+const createJson = (
+  packet: IOpcode,
+  client: string,
+  type: string,
+  name: string
+) => {
+  const obj = packet;
 
-  const dir = process.cwd() + `/json/${client}/${type}/${obj.name}.json`;
-  
-  if (!existsSync(path.dirname(dir))) { 
+  const dir = process.cwd() + `/json/${client}/${type}/${name}.json`;
+
+  if (!existsSync(path.dirname(dir))) {
     mkdirSync(path.dirname(dir), { recursive: true });
   }
 
-
-  jsonfile.writeFile(dir, obj, (err) => {
-    if (err) console.error(err)
-  })
-
-}
+  jsonfile.writeFile(dir, obj, { spaces: 2, EOL: '\r\n' }, (err) => {
+    if (err) console.error(err);
+  });
+};
 
 const camalize = (string: string) => {
   return string
@@ -108,7 +111,6 @@ const loop = (packet: string) => {
   }
 };
 
-
 const packetClient = (type: string, client: string) => {
   const dir = readdirSync(process.cwd() + `/src/packets/`);
 
@@ -116,55 +118,68 @@ const packetClient = (type: string, client: string) => {
   const packetFile = ini.parse(
     readFileSync(path.resolve(__dirname, `../packets/${packet}`), "utf-8")
   );
-  
+
   const packetsClient = packetFile.client;
   const packetsServer = packetFile.server;
-  return (type === "Client") ? packetsClient : packetsServer;
+  return type === "Client" ? packetsClient : packetsServer;
+};
 
-}
+const gernerateBytes = (bytes: ITypes[]) => {
+  let pushJson: { [x: string]: { $type: string; $alias: string } }[] = [];
+  bytes.forEach((byte) => {
+    pushJson.push({
+      [byte.name]: {
+        $type: byte.type,
+        $alias: byte.name,
+      },
+    });
+  });
+
+  return pushJson;
+};
 
 export const generate = (type: string, client = "HighFive") => {
   const data = packetClient(type, client);
   if (!type) return;
-  if(!data) return;
+  if (!data) return;
   let pushItem: IOpcode[] = [];
 
   try {
-   
     Object.entries(data).forEach(([key, value]) => {
       try {
         if (typeof value === "string") {
           const name = nameRegex(value);
-          const bytes = typeRegex(value);
-  
+          const resultRegexType = typeRegex(value);
+          const bytes = gernerateBytes(resultRegexType as ITypes[]);
+
           if (key.includes("//") || key.length > 2) return; // ignore comment and two ID packets
-  
+
           if (name) {
-            pushItem.push({
-              opcode: key,
-              name,
-              bytes,
+            let saveJson: any = {};
+            saveJson = {
+              prefix: {
+                $type: "bytes",
+                $length: 1,
+                $default: [parseInt("0x" + key)],
+              },
+            };
+
+            Object.entries(bytes).forEach(([key, value]) => {
+              saveJson = { ...saveJson, ...value };
             });
-  
-            createJson({
-              opcode: key,
-              name,
-              bytes,
-            },
-            client,
-            type
-            )
-  
+
+            createJson(saveJson, client, type, name);
           }
         }
       } catch (error) {
         console.log(error);
       }
     });
+
+    console.log(`${type} packets generated`);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 
   return pushItem;
 };
-

@@ -1,4 +1,4 @@
 import { generate } from "./tools";
 
-generate("Server", "HighFive");
-generate("Client", "HighFive");
+generate("Server");
+generate("Client");
