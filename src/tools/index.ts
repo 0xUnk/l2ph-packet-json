@@ -29,7 +29,7 @@ const createJson = (
     mkdirSync(path.dirname(dir), { recursive: true });
   }
 
-  jsonfile.writeFile(dir, obj, { spaces: 2, EOL: '\r\n' }, (err) => {
+  jsonfile.writeFile(dir, obj, { spaces: 2, EOL: "\r\n" }, (err) => {
     if (err) console.error(err);
   });
 };
@@ -71,7 +71,6 @@ const dataType = (type: string) => {
 const nameRegex = (packet: string) => {
   if (!packet) return;
   const regex = /(?<header>[a-z][a-z0-9]*)/gim;
-
   const exec = regex.exec(packet);
 
   if (exec && exec.groups) {
@@ -146,40 +145,34 @@ export const generate = (type: string, client = "HighFive") => {
 
   try {
     Object.entries(data).forEach(([key, value]) => {
-      try {
-        if (typeof value === "string") {
-          const name = nameRegex(value);
-          const resultRegexType = typeRegex(value);
-          const bytes = gernerateBytes(resultRegexType as ITypes[]);
+      if (typeof value === "string") {
+        const name = nameRegex(value);
+        if(!name) return;
+        const resultRegexType = typeRegex(value);
+        const bytes = gernerateBytes(resultRegexType as ITypes[]);
 
-          if (key.includes("//") || key.length > 2) return; // ignore comment and two ID packets
+        if (key.includes("//") || key.length > 2) return; // ignore comment and two ID packets
 
-          if (name) {
-            let saveJson: any = {};
-            saveJson = {
-              prefix: {
-                $type: "bytes",
-                $length: 1,
-                $default: [parseInt("0x" + key)],
-              },
-            };
+        let saveJson: any = {};
+        saveJson = {
+          prefix: {
+            $type: "bytes",
+            $length: 1,
+            $default: [parseInt("0x" + key)],
+          },
+        };
 
-            Object.entries(bytes).forEach(([key, value]) => {
-              saveJson = { ...saveJson, ...value };
-            });
+        Object.entries(bytes).forEach(([key, value]) => {
+          saveJson = { ...saveJson, ...value };
+        });
 
-            createJson(saveJson, client, type, name);
-          }
-        }
-      } catch (error) {
-        console.log(error);
+        createJson(saveJson, client, type, name);
       }
     });
-
-    console.log(`${type} packets generated`);
   } catch (error) {
     console.log(error);
   }
 
+  console.log(`${type} packets generated`);
   return pushItem;
 };
